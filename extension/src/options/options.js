@@ -10,7 +10,7 @@ import {
 } from "../shared/settings.js";
 
 const CHECKBOX_KEYS = ["excludeArchives", "excludeJunk", "excludeTrash"];
-const MINUTES_ERROR = `${LABEL_CACHE_MINUTES_MIN}–${LABEL_CACHE_MINUTES_MAX} 사이의 정수를 입력하세요. (저장되지 않음)`;
+const MINUTES_RANGE = [String(LABEL_CACHE_MINUTES_MIN), String(LABEL_CACHE_MINUTES_MAX)];
 
 // Last successfully saved (or loaded) settings.
 let saved = { ...DEFAULT_SETTINGS };
@@ -18,6 +18,29 @@ let saved = { ...DEFAULT_SETTINGS };
 let saveQueue = Promise.resolve();
 
 const $ = (id) => document.getElementById(id);
+
+// Text comes from _locales via browser.i18n (Thunderbird UI language, English fallback).
+// If a message is missing, the English text already in the HTML stays.
+function msg(key, substitutions) {
+  return browser.i18n.getMessage(key, substitutions) || "";
+}
+
+function localize() {
+  document.documentElement.lang = browser.i18n.getUILanguage();
+  for (const element of document.querySelectorAll("[data-i18n]")) {
+    const text = msg(element.dataset.i18n);
+    if (text) {
+      element.textContent = text;
+    }
+  }
+  const desc = msg("labelCacheMinutesDesc", [
+    ...MINUTES_RANGE,
+    String(DEFAULT_SETTINGS.labelCacheMinutes),
+  ]);
+  if (desc) {
+    $("labelCacheMinutes-desc").textContent = desc;
+  }
+}
 
 function render(settings) {
   for (const key of CHECKBOX_KEYS) {
@@ -28,7 +51,10 @@ function render(settings) {
 }
 
 function showMinutesError(show) {
-  $("labelCacheMinutes-error").textContent = show ? MINUTES_ERROR : "";
+  $("labelCacheMinutes-error").textContent = show
+    ? msg("labelCacheMinutesError", MINUTES_RANGE) ||
+      `Enter a whole number from ${MINUTES_RANGE[0]} to ${MINUTES_RANGE[1]}. (Not saved)`
+    : "";
   $("labelCacheMinutes").setAttribute("aria-invalid", show ? "true" : "false");
 }
 
@@ -57,6 +83,8 @@ async function load() {
 }
 
 function init() {
+  localize();
+
   for (const key of CHECKBOX_KEYS) {
     $(key).addEventListener("change", (event) => {
       enqueueSave({ [key]: event.target.checked });

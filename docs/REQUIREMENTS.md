@@ -24,6 +24,7 @@ This document specifies the extension so it can be implemented from scratch. It 
 | `description` | `Shows Gmail labels at the top of each message` |
 | `author` | `leekd123` |
 | `version` | `0.1.0` |
+| `default_locale` | `en` — options page text lives in `_locales/en` and `_locales/ko` (17.2) |
 | `browser_specific_settings.gecko.id` | `label-chips-for-gmail@leekd123` (must not change after the first release — changing it makes it a different extension) |
 | `browser_specific_settings.gecko.strict_min_version` | `121.0` (uses `folders.query`, `MailFolder.id`, and `folderId` in `messages.query`; `messagesPerPage` is TB 120+) |
 | `icons` | `images/icon-32.png`, `icon-48.png`, `icon-64.png` (32/48/64 px PNG, newly made) |
@@ -40,7 +41,7 @@ What each permission is for:
 
 - `storage`: storing user settings (`storage.local`) and detecting changes (`storage.onChanged`). No data other than settings is stored.
 
-No other permissions are needed.
+No other permissions are needed. (`i18n`, used for the options page text, needs no permission.)
 
 Project structure:
 
@@ -48,6 +49,7 @@ Project structure:
 label-chips/                 repository root
   extension/                 extension source (the contents of this folder become the xpi as-is)
     manifest.json
+    _locales/              options page text (en, ko)
     images/
     src/
       background.html        background page (loads ES modules)
@@ -331,6 +333,7 @@ Known limitation (accepted in 0.1.0): `messages.query` walks every header in a f
 | 24 | Run "Restore defaults" | Every item is saved as its default and takes effect immediately |
 | 25 | Restart Thunderbird | Changed settings are kept |
 | 26 | Quickly go back from message A → B → A before the search finishes | A's labels are shown (not left empty) |
+| 27 | Open the options page with the Thunderbird UI in Korean, then in another language (e.g. English, German) | Korean text in Korean; English text otherwise |
 
 ## 16. User manual requirements
 
@@ -381,10 +384,10 @@ The README covers how to open the options page (Add-ons Manager → Extensions �
 
 | Key | Name on screen | Type | Default | Allowed range | Affects |
 |---|---|---|---|---|---|
-| `excludeArchives` | 전체보관함 제외 (Exclude All Mail) | Boolean | `true` | — | 8.1 |
-| `excludeJunk` | 스팸 제외 (Exclude Spam) | Boolean | `true` | — | 8.1 |
-| `excludeTrash` | 휴지통 제외 (Exclude Trash) | Boolean | `true` | — | 8.1 |
-| `labelCacheMinutes` | 라벨 캐시 유지 시간 (분) (Label cache lifetime, minutes) | Integer | `30` | `1`–`1440` | 9.2 |
+| `excludeArchives` | Exclude All Mail (전체보관함 제외) | Boolean | `true` | — | 8.1 |
+| `excludeJunk` | Exclude Spam (스팸 제외) | Boolean | `true` | — | 8.1 |
+| `excludeTrash` | Exclude Trash (휴지통 제외) | Boolean | `true` | — | 8.1 |
+| `labelCacheMinutes` | Label cache lifetime (minutes) (라벨 캐시 유지 시간 (분)) | Integer | `30` | `1`–`1440` | 9.2 |
 
 Values not in this table (the fixed constants in section 18) cannot be changed by the user.
 
@@ -392,11 +395,12 @@ Values not in this table (the fixed constants in section 18) cannot be changed b
 
 - Provided through `options_ui` in the manifest. Built with HTML/JS/CSS, no framework.
 - Layout:
-  - "검색" (Search) section: three checkboxes for excluded folders
-  - "캐시" (Cache) section: label cache lifetime (number input)
-  - "기본값으로 되돌리기" (Restore defaults) button
+  - "Search" (검색) section: three checkboxes for excluded folders
+  - "Cache" (캐시) section: label cache lifetime (number input)
+  - "Restore defaults" (기본값으로 되돌리기) button
 - Each item has a one-line description below it. The following item shows a warning:
-  - Exclude All Mail: "끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다." (When turned off, All Mail is searched every time a message is opened, which can make Thunderbird slow or freeze briefly.)
+  - Exclude All Mail: "When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly." (Korean: "끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다.")
+- Language: all text on the page (title, section names, item names, descriptions, warning, error, button) comes from `_locales/<lang>/messages.json` through `browser.i18n.getMessage`. Supported languages are English (`en`, `default_locale`) and Korean (`ko`); Thunderbird picks one from its UI language and falls back to English. Numbers in messages (range, default) are filled in from the constants in the shared settings module, not written into the message text. The HTML holds the English text as a fallback.
 - Saving: no save button; values are saved as soon as they change (`change` event).
 - Validation: if a value is not an integer or is outside the allowed range, it is not saved and an error is shown next to that input. Other items can still be saved.
 - "Restore defaults" saves every item as its default and updates the screen.

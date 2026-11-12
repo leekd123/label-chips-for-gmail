@@ -26,6 +26,7 @@
 | `description` | `Shows Gmail labels at the top of each message` |
 | `author` | `leekd123` |
 | `version` | `0.1.0` |
+| `default_locale` | `en` — 설정 화면 문구는 `_locales/en`, `_locales/ko`에 둔다 (17.2) |
 | `browser_specific_settings.gecko.id` | `label-chips-for-gmail@leekd123` (최초 배포 후에는 변경 금지 — 바꾸면 다른 확장으로 인식됨) |
 | `browser_specific_settings.gecko.strict_min_version` | `121.0` (`folders.query`, `MailFolder.id`, `messages.query`의 `folderId` 사용. `messagesPerPage`는 TB 120+) |
 | `icons` | `images/icon-32.png`, `icon-48.png`, `icon-64.png` (32/48/64px PNG, 새로 제작) |
@@ -42,7 +43,7 @@
 
 - `storage`: 사용자 설정 저장(`storage.local`)과 변경 감지(`storage.onChanged`). 설정 외의 데이터는 저장하지 않는다.
 
-필요한 권한은 위가 전부다.
+필요한 권한은 위가 전부다. (설정 화면 문구에 쓰는 `i18n`은 권한이 필요 없다.)
 
 프로젝트 구조:
 
@@ -50,6 +51,7 @@
 label-chips/                 저장소 루트
   extension/                 확장 소스 (이 폴더의 내용이 그대로 xpi가 됨)
     manifest.json
+    _locales/              설정 화면 문구 (en, ko)
     images/
     src/
       background.html        백그라운드 페이지 (ES 모듈 로드)
@@ -333,6 +335,7 @@ Gmail에서 라벨 추가/제거/이동은 Thunderbird에서 폴더 간 복사/�
 | 24 | "기본값으로 되돌리기" 실행 | 모든 항목이 기본값으로 저장되고 즉시 적용 |
 | 25 | Thunderbird 재시작 | 바꾼 설정이 유지됨 |
 | 26 | 검색이 끝나기 전에 메일 A → B → A로 빠르게 되돌아옴 | A의 라벨이 표시됨 (빈 채로 남지 않음) |
+| 27 | Thunderbird UI를 한국어로, 그다음 다른 언어(예: 영어, 독일어)로 두고 설정 화면 열기 | 한국어일 때는 한국어, 그 밖에는 영어로 표시 |
 
 ## 16. 사용자 매뉴얼 요구사항
 
@@ -383,10 +386,10 @@ Thunderbird는 기본적으로 받은편지함만 새 메일을 확인한다. Gm
 
 | 키 | 화면 표시 이름 | 형식 | 기본값 | 허용 범위 | 영향 |
 |---|---|---|---|---|---|
-| `excludeArchives` | 전체보관함 제외 | 불리언 | `true` | — | 8.1 |
-| `excludeJunk` | 스팸 제외 | 불리언 | `true` | — | 8.1 |
-| `excludeTrash` | 휴지통 제외 | 불리언 | `true` | — | 8.1 |
-| `labelCacheMinutes` | 라벨 캐시 유지 시간 (분) | 정수 | `30` | `1`–`1440` | 9.2 |
+| `excludeArchives` | 전체보관함 제외 (Exclude All Mail) | 불리언 | `true` | — | 8.1 |
+| `excludeJunk` | 스팸 제외 (Exclude Spam) | 불리언 | `true` | — | 8.1 |
+| `excludeTrash` | 휴지통 제외 (Exclude Trash) | 불리언 | `true` | — | 8.1 |
+| `labelCacheMinutes` | 라벨 캐시 유지 시간 (분) (Label cache lifetime (minutes)) | 정수 | `30` | `1`–`1440` | 9.2 |
 
 위 표에 없는 값(18절의 고정 상수)은 사용자가 바꿀 수 없다.
 
@@ -398,7 +401,8 @@ Thunderbird는 기본적으로 받은편지함만 새 메일을 확인한다. Gm
   - "캐시" 영역: 라벨 캐시 유지 시간(숫자 입력)
   - "기본값으로 되돌리기" 버튼
 - 각 항목 아래에 한 줄 설명을 둔다. 다음 항목에는 경고 문구를 표시한다.
-  - 전체보관함 제외: "끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다."
+  - 전체보관함 제외: "끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다." (영어: "When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly.")
+- 언어: 화면의 모든 문구(제목, 영역 이름, 항목 이름, 설명, 경고, 오류, 버튼)는 `_locales/<언어>/messages.json`에서 `browser.i18n.getMessage`로 읽는다. 지원 언어는 영어(`en`, `default_locale`)와 한국어(`ko`)이고, Thunderbird UI 언어에 따라 고르며 없으면 영어를 쓴다. 문구 속 숫자(범위, 기본값)는 메시지에 직접 쓰지 않고 공유 설정 모듈의 상수로 채운다. HTML에는 대비용으로 영어 문구를 둔다.
 - 저장 방식: 저장 버튼 없이 값이 바뀔 때(`change` 이벤트) 바로 저장한다.
 - 입력 검증: 정수가 아니거나 허용 범위를 벗어나면 저장하지 않고 해당 입력 옆에 오류를 표시한다. 다른 항목의 저장은 막지 않는다.
 - "기본값으로 되돌리기"는 모든 항목을 기본값으로 저장하고 화면에 반영한다.

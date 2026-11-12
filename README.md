@@ -37,7 +37,7 @@ By default, Thunderbird checks only the Inbox for new mail. To make labels appli
 
 ### Settings
 
-Open **Add-ons Manager → Extensions → Label Chips for Gmail → Options**. Changes are saved immediately and take effect **the next time you open a message**, without restarting Thunderbird (chips already shown are not updated). The **기본값으로 되돌리기** (Restore defaults) button saves the default value for every item.
+Open **Add-ons Manager → Extensions → Label Chips for Gmail → Options**. Changes are saved immediately and take effect **the next time you open a message**, without restarting Thunderbird (chips already shown are not updated). The **Restore defaults** button saves the default value for every item. The options page is shown in Korean when Thunderbird's UI language is Korean, and in English otherwise.
 
 The options page is in Korean; the labels shown on screen are given in parentheses below.
 

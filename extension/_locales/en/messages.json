@@ -1,0 +1,53 @@
+{
+  "optionsTitle": {
+    "message": "Label Chips for Gmail Options"
+  },
+  "sectionSearch": {
+    "message": "Search"
+  },
+  "excludeArchivesLabel": {
+    "message": "Exclude All Mail"
+  },
+  "excludeArchivesDesc": {
+    "message": "Leaves All Mail ([Gmail]/All Mail) out of the label search."
+  },
+  "excludeArchivesWarning": {
+    "message": "When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly."
+  },
+  "excludeJunkLabel": {
+    "message": "Exclude Spam"
+  },
+  "excludeJunkDesc": {
+    "message": "Leaves the Spam folder out of the label search."
+  },
+  "excludeTrashLabel": {
+    "message": "Exclude Trash"
+  },
+  "excludeTrashDesc": {
+    "message": "Leaves the Trash folder out of the label search."
+  },
+  "sectionCache": {
+    "message": "Cache"
+  },
+  "labelCacheMinutesLabel": {
+    "message": "Label cache lifetime (minutes)"
+  },
+  "labelCacheMinutesDesc": {
+    "message": "How long labels, once found, are shown without searching again. $MIN$–$MAX$ minutes, default $DEFAULT$.",
+    "placeholders": {
+      "min": { "content": "$1" },
+      "max": { "content": "$2" },
+      "default": { "content": "$3" }
+    }
+  },
+  "labelCacheMinutesError": {
+    "message": "Enter a whole number from $MIN$ to $MAX$. (Not saved)",
+    "placeholders": {
+      "min": { "content": "$1" },
+      "max": { "content": "$2" }
+    }
+  },
+  "resetButton": {
+    "message": "Restore defaults"
+  }
+}

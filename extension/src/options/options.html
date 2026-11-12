@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="color-scheme" content="light dark">
-    <title>Label Chips for Gmail 설정</title>
+    <title data-i18n="optionsTitle">Label Chips for Gmail Options</title>
     <link rel="stylesheet" href="options.css">
     <script type="module" src="options.js"></script>
   </head>
   <body>
     <section>
-      <h2>검색</h2>
+      <h2 data-i18n="sectionSearch">Search</h2>
 
       <div class="field">
-        <label><input type="checkbox" id="excludeArchives"> 전체보관함 제외</label>
-        <p class="desc">전체보관함([Gmail]/All Mail)을 라벨 검색에서 뺍니다.</p>
-        <p class="warning">끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다.</p>
+        <label><input type="checkbox" id="excludeArchives"> <span data-i18n="excludeArchivesLabel">Exclude All Mail</span></label>
+        <p class="desc" data-i18n="excludeArchivesDesc">Leaves All Mail ([Gmail]/All Mail) out of the label search.</p>
+        <p class="warning" data-i18n="excludeArchivesWarning">When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly.</p>
       </div>
 
       <div class="field">
-        <label><input type="checkbox" id="excludeJunk"> 스팸 제외</label>
-        <p class="desc">스팸 폴더를 라벨 검색에서 뺍니다.</p>
+        <label><input type="checkbox" id="excludeJunk"> <span data-i18n="excludeJunkLabel">Exclude Spam</span></label>
+        <p class="desc" data-i18n="excludeJunkDesc">Leaves the Spam folder out of the label search.</p>
       </div>
 
       <div class="field">
-        <label><input type="checkbox" id="excludeTrash"> 휴지통 제외</label>
-        <p class="desc">휴지통 폴더를 라벨 검색에서 뺍니다.</p>
+        <label><input type="checkbox" id="excludeTrash"> <span data-i18n="excludeTrashLabel">Exclude Trash</span></label>
+        <p class="desc" data-i18n="excludeTrashDesc">Leaves the Trash folder out of the label search.</p>
       </div>
     </section>
 
     <section>
-      <h2>캐시</h2>
+      <h2 data-i18n="sectionCache">Cache</h2>
 
       <div class="field">
-        <label for="labelCacheMinutes">라벨 캐시 유지 시간 (분)</label>
+        <label for="labelCacheMinutes" data-i18n="labelCacheMinutesLabel">Label cache lifetime (minutes)</label>
         <div class="row">
           <input type="number" id="labelCacheMinutes" min="1" max="1440" step="1" inputmode="numeric">
           <span class="error" id="labelCacheMinutes-error" role="alert"></span>
         </div>
-        <p class="desc">한 번 찾은 라벨을 다시 검색하지 않고 보여 주는 시간입니다. 1–1440분, 기본값 30분.</p>
+        <p class="desc" id="labelCacheMinutes-desc">How long labels, once found, are shown without searching again. 1–1440 minutes, default 30.</p>
       </div>
     </section>
 
-    <button type="button" id="reset">기본값으로 되돌리기</button>
+    <button type="button" id="reset" data-i18n="resetButton">Restore defaults</button>
   </body>
 </html>

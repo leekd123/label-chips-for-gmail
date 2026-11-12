@@ -4,6 +4,7 @@
   "description": "Shows Gmail labels at the top of each message",
   "author": "leekd123",
   "version": "0.1.0",
+  "default_locale": "en",
   "browser_specific_settings": {
     "gecko": {
       "id": "label-chips-for-gmail@leekd123",

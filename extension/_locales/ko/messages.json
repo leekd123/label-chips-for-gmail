@@ -1,0 +1,53 @@
+{
+  "optionsTitle": {
+    "message": "Label Chips for Gmail 설정"
+  },
+  "sectionSearch": {
+    "message": "검색"
+  },
+  "excludeArchivesLabel": {
+    "message": "전체보관함 제외"
+  },
+  "excludeArchivesDesc": {
+    "message": "전체보관함([Gmail]/All Mail)을 라벨 검색에서 뺍니다."
+  },
+  "excludeArchivesWarning": {
+    "message": "끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다."
+  },
+  "excludeJunkLabel": {
+    "message": "스팸 제외"
+  },
+  "excludeJunkDesc": {
+    "message": "스팸 폴더를 라벨 검색에서 뺍니다."
+  },
+  "excludeTrashLabel": {
+    "message": "휴지통 제외"
+  },
+  "excludeTrashDesc": {
+    "message": "휴지통 폴더를 라벨 검색에서 뺍니다."
+  },
+  "sectionCache": {
+    "message": "캐시"
+  },
+  "labelCacheMinutesLabel": {
+    "message": "라벨 캐시 유지 시간 (분)"
+  },
+  "labelCacheMinutesDesc": {
+    "message": "한 번 찾은 라벨을 다시 검색하지 않고 보여 주는 시간입니다. $MIN$–$MAX$분, 기본값 $DEFAULT$분.",
+    "placeholders": {
+      "min": { "content": "$1" },
+      "max": { "content": "$2" },
+      "default": { "content": "$3" }
+    }
+  },
+  "labelCacheMinutesError": {
+    "message": "$MIN$–$MAX$ 사이의 정수를 입력하세요. (저장되지 않음)",
+    "placeholders": {
+      "min": { "content": "$1" },
+      "max": { "content": "$2" }
+    }
+  },
+  "resetButton": {
+    "message": "기본값으로 되돌리기"
+  }
+}
