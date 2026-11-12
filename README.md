@@ -1,92 +1,94 @@
 # Label Chips for Gmail
 
-**한국어** | [English](README.en.md)
+[한국어](README.ko.md) | **English**
 
-Gmail/Google Workspace IMAP 계정의 메일을 열면, 그 메일에 붙은 Gmail 라벨을 본문 맨 위에 칩으로 보여 주는 Thunderbird 확장.
+A Thunderbird extension that shows the Gmail labels of a message as chips at the top of the message body when you open a message from a Gmail/Google Workspace IMAP account.
 
-- Thunderbird 121 이상
-- 요구사항 명세: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)
+- Thunderbird 121 or later
+- Requirements specification: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) (Korean translation: [docs/REQUIREMENTS.ko.md](docs/REQUIREMENTS.ko.md))
 
-## 사용 방법
+## Usage
 
-### 동작 원리
+### How it works
 
-이 확장은 Gmail 서버에 직접 묻지 않고, Thunderbird가 내려받은 폴더들에서 같은 메일(같은 `Message-ID`)을 찾아 그 폴더 이름을 라벨로 보여 줍니다. 따라서 **Thunderbird가 아직 동기화하지 않은 라벨 폴더의 라벨은 표시되지 않습니다.** 전체보관함·스팸·휴지통은 기본적으로 라벨로 표시하지 않습니다(지금 열어 본 폴더인 경우에만 표시).
+The extension does not ask the Gmail server. Instead, it looks for the same message (the same `Message-ID`) in the folders Thunderbird has already downloaded, and shows the names of those folders as labels. As a result, **labels whose folders Thunderbird has not synchronized yet are not shown.** All Mail, Spam and Trash are not shown as labels by default (they are shown only when they are the folder you opened the message from).
 
-- 지금 메일을 보고 있는 폴더는 회색 칩으로 맨 앞에, 나머지 라벨은 보라색 칩으로 표시됩니다.
-- Google 계정이 아니면(POP3, 다른 메일 서비스, 로컬 폴더) 아무것도 표시하지 않습니다.
+- The folder you are viewing the message from is shown first as a grey chip; the other labels are shown as purple chips.
+- Nothing is shown for accounts that are not Google accounts (POP3, other mail services, Local Folders).
 
-### 권장 설정: 모든 폴더에서 새 메일 확인
+### Recommended setting: check all folders for new mail
 
-Thunderbird는 기본적으로 받은편지함만 새 메일을 확인합니다. Gmail 필터로 자동 분류된 라벨이 새 메일에 바로 보이게 하려면 다음 중 하나를 설정하세요.
+By default, Thunderbird checks only the Inbox for new mail. To make labels applied by Gmail filters appear on new messages right away, use one of the following.
 
-**방법 A — 모든 폴더 (권장)**
+**Option A — all folders (recommended)**
 
-1. Thunderbird **설정 → 일반** 맨 아래의 **설정 편집기**를 엽니다.
-2. `mail.server.default.check_all_folders_for_new`를 검색합니다.
-3. 값을 `true`로 바꿉니다.
-4. Thunderbird를 재시작합니다.
+1. Open Thunderbird **Settings → General** and click **Config Editor** at the bottom.
+2. Search for `mail.server.default.check_all_folders_for_new`.
+3. Set the value to `true`.
+4. Restart Thunderbird.
 
-> 폴더가 많은 계정에서는 새 메일 확인 시간이 늘어날 수 있습니다.
+> On accounts with many folders, checking for new mail may take longer.
 
-**방법 B — 특정 라벨 폴더만**
+**Option B — selected label folders only**
 
-1. 폴더 창에서 라벨 폴더를 오른쪽 클릭 → **속성**.
-2. **새 메시지를 받을 때 항상 이 폴더 확인**(영문: *When getting new messages for this account, always check this folder*)을 켭니다.
-3. 필요한 라벨 폴더마다 반복합니다.
+1. In the folder pane, right-click a label folder → **Properties**.
+2. Turn on **When getting new messages for this account, always check this folder**.
+3. Repeat for each label folder you need.
 
-### 설정
+### Settings
 
-**부가 기능 관리자 → 확장 → Label Chips for Gmail → 설정** 탭에서 바꿀 수 있습니다. 값을 바꾸면 바로 저장되고, Thunderbird를 재시작하지 않아도 **다음에 메일을 열 때부터** 적용됩니다(이미 표시된 칩은 바뀌지 않음). **기본값으로 되돌리기** 버튼은 모든 항목을 기본값으로 저장합니다.
+Open **Add-ons Manager → Extensions → Label Chips for Gmail → Options**. Changes are saved immediately and take effect **the next time you open a message**, without restarting Thunderbird (chips already shown are not updated). The **기본값으로 되돌리기** (Restore defaults) button saves the default value for every item.
 
-| 항목 | 설명 | 기본값 | 주의 |
+The options page is in Korean; the labels shown on screen are given in parentheses below.
+
+| Item | Description | Default | Notes |
 |---|---|---|---|
-| 전체보관함 제외 | 전체보관함(`[Gmail]/All Mail`)을 라벨 검색에서 뺍니다. | 켜짐 | 끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다. |
-| 스팸 제외 | 스팸 폴더를 라벨 검색에서 뺍니다. | 켜짐 | |
-| 휴지통 제외 | 휴지통 폴더를 라벨 검색에서 뺍니다. | 켜짐 | |
-| 라벨 캐시 유지 시간 (분) | 한 번 찾은 라벨을 다시 검색하지 않고 보여 주는 시간. | 30 | 1–1440 사이 정수만 저장됩니다. 범위를 벗어나면 오류가 표시되고 이전 값이 유지됩니다. |
+| Exclude All Mail (전체보관함 제외) | Leaves All Mail (`[Gmail]/All Mail`) out of the label search. | On | When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly. |
+| Exclude Spam (스팸 제외) | Leaves the Spam folder out of the label search. | On | |
+| Exclude Trash (휴지통 제외) | Leaves the Trash folder out of the label search. | On | |
+| Label cache lifetime in minutes (라벨 캐시 유지 시간 (분)) | How long labels, once found, are shown without searching again. | 30 | Only integers from 1 to 1440 are saved. Out-of-range input shows an error and the previous value is kept. |
 
-메일 복사·이동·삭제, 새 메일 수신, 폴더 변경, 설정 변경이 있으면 캐시 시간과 관계없이 다시 검색합니다.
+Copying, moving or deleting messages, receiving new mail, folder changes and settings changes trigger a new search regardless of the cache lifetime.
 
-## 문제 해결
+## Troubleshooting
 
-| 증상 | 원인 | 해결 |
+| Symptom | Cause | Fix |
 |---|---|---|
-| 새 메일에 현재 폴더 라벨만 보이고 자동 분류 라벨이 안 보임 | 라벨 폴더가 아직 동기화되지 않음 | 위의 "권장 설정"을 적용하세요. 당장은 해당 라벨 폴더를 한 번 클릭한 뒤 메일을 다시 엽니다. |
-| 방금 Gmail 웹에서 붙인 라벨이 안 보임 | 위와 같음 (서버 변경이 아직 동기화되지 않음) | 위와 같음 |
-| 라벨이 전혀 표시되지 않음 | Google 계정으로 판별되지 않음 (POP3 계정, IMAP이 아닌 계정, 도메인 MX 조회 실패) | IMAP 계정인지 확인하세요. 네트워크 문제였다면 5분 뒤 메일을 다시 엽니다. |
-| 전체보관함/스팸/휴지통이 라벨로 안 보임 | 기본 설정에서 제외됨 | 필요하면 설정에서 제외를 끕니다 (전체보관함은 느려질 수 있음). |
-| 열려 있는 메일의 라벨이 바뀌지 않음 | 이미 표시된 라벨은 갱신하지 않음 | 다른 메일을 선택했다가 다시 엽니다. |
+| A new message shows only the current folder, not the labels applied by filters | The label folders have not been synchronized yet | Apply the "Recommended setting" above. For now, click the label folder once and open the message again. |
+| A label just added in Gmail on the web is not shown | Same as above (the server change has not been synchronized yet) | Same as above |
+| No labels are shown at all | The account was not recognized as a Google account (POP3 account, non-IMAP account, failed MX lookup for the domain) | Make sure it is an IMAP account. If it was a network problem, open the message again after 5 minutes. |
+| All Mail / Spam / Trash are not shown as labels | They are excluded by default | Turn off the exclusion in the settings if you need them (All Mail can be slow). |
+| Labels of the open message do not change | Labels already shown are not refreshed | Select another message, then open this one again. |
 
-## 개인정보
+## Privacy
 
-- 외부 통신은 `[Gmail]` 폴더가 없고 메일 주소가 `gmail.com`/`googlemail.com`이 아닌 계정의 **도메인**을 `dns.google`에 MX 조회하는 것뿐입니다.
-- 저장하는 것은 위 설정값뿐이며, 메일·폴더를 수정하지 않습니다.
+- The only network traffic is an MX lookup at `dns.google` for the **domain** of accounts that have no `[Gmail]` folder and whose address is not `gmail.com`/`googlemail.com`.
+- Only the settings above are stored. Messages and folders are never modified.
 
-## 빌드
+## Build
 
 ```powershell
 ./deploy.ps1
 ```
 
-`.deploy/label-chips-<version>.xpi`가 생성된다.
+This creates `.deploy/label-chips-<version>.xpi`.
 
-## 테스트
+## Testing
 
-Node.js 22 이상의 내장 테스트 러너를 쓴다(외부 패키지·`package.json` 없음).
+Uses the built-in test runner of Node.js 22 or later (no external packages, no `package.json`).
 
 ```powershell
 node --test "tests/*.test.mjs"
 ```
 
-- `tests/helpers/fake-browser.mjs`가 Thunderbird API(`messages`, `folders`, `accounts`, `messageDisplay`, `tabs`, `storage`, `fetch`)를 메모리에서 흉내 내고, 백그라운드 모듈은 실제 파일을 그대로 불러온다.
-- `tests/`는 `extension/` 밖에 있으므로 xpi에 들어가지 않는다.
-- 실제 Thunderbird에서만 확인할 수 있는 항목(이미 열린 메일 탭 주입, 다크 모드, 스크롤 고정, 설치)은 명세 15절로 수동 확인한다.
+- `tests/helpers/fake-browser.mjs` emulates the Thunderbird APIs (`messages`, `folders`, `accounts`, `messageDisplay`, `tabs`, `storage`, `fetch`) in memory, and the background modules are loaded from the real files as-is.
+- `tests/` is outside `extension/`, so it is not included in the xpi.
+- Items that can only be checked in a real Thunderbird (injection into already-open message tabs, dark mode, sticky label row, installation) are checked manually with section 15 of the specification.
 
-## 개발 중 설치
+## Installing during development
 
-Thunderbird → 부가 기능 및 테마 → 톱니바퀴 → 부가 기능 디버그 → 임시 부가 기능 로드 → `extension/manifest.json` 선택.
+Thunderbird → Add-ons and Themes → gear icon → Debug Add-ons → Load Temporary Add-on → select `extension/manifest.json`.
 
-## 라이선스
+## License
 
 [MIT](LICENSE)
