@@ -1,0 +1,6 @@
+.deploy/
+*.xpi
+.claude/settings.local.json
+.claude/worktrees/
+Thumbs.db
+.DS_Store
