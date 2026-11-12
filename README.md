@@ -1,5 +1,7 @@
 # Label Chips for Gmail
 
+**한국어** | [English](README.en.md)
+
 Gmail/Google Workspace IMAP 계정의 메일을 열면, 그 메일에 붙은 Gmail 라벨을 본문 맨 위에 칩으로 보여 주는 Thunderbird 확장.
 
 - Thunderbird 121 이상
@@ -68,6 +70,18 @@ Thunderbird는 기본적으로 받은편지함만 새 메일을 확인합니다.
 ```
 
 `.deploy/label-chips-<version>.xpi`가 생성된다.
+
+## 테스트
+
+Node.js 22 이상의 내장 테스트 러너를 쓴다(외부 패키지·`package.json` 없음).
+
+```powershell
+node --test "tests/*.test.mjs"
+```
+
+- `tests/helpers/fake-browser.mjs`가 Thunderbird API(`messages`, `folders`, `accounts`, `messageDisplay`, `tabs`, `storage`, `fetch`)를 메모리에서 흉내 내고, 백그라운드 모듈은 실제 파일을 그대로 불러온다.
+- `tests/`는 `extension/` 밖에 있으므로 xpi에 들어가지 않는다.
+- 실제 Thunderbird에서만 확인할 수 있는 항목(이미 열린 메일 탭 주입, 다크 모드, 스크롤 고정, 설치)은 명세 15절로 수동 확인한다.
 
 ## 개발 중 설치
 
