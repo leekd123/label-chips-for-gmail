@@ -1,0 +1,70 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  background-color: Canvas;
+  color: CanvasText;
+  font: 14px system-ui, sans-serif;
+  margin: 1rem;
+  max-width: 40rem;
+}
+
+h2 {
+  font-size: 1.1em;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.field {
+  margin-bottom: 0.9rem;
+}
+
+.desc,
+.warning {
+  margin: 0.2rem 0 0 1.6rem;
+  font-size: 0.9em;
+}
+
+.desc {
+  opacity: 0.75;
+}
+
+.warning {
+  color: #b35900;
+}
+
+@media (prefers-color-scheme: dark) {
+  .warning {
+    color: #ffb366;
+  }
+}
+
+.field:has(input[type="number"]) .desc {
+  margin-left: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+input[type="number"] {
+  width: 6rem;
+}
+
+.error {
+  color: #d70022;
+  font-size: 0.9em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .error {
+    color: #ff6b81;
+  }
+}
+
+button {
+  margin-top: 0.5rem;
+}

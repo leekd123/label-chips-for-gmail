@@ -23,7 +23,7 @@ Thunderbird MailExtension(MV2). Gmail IMAP 계정의 메일 본문 상단에 라
 - `README.md`에는 명세 16절의 "사용 방법"·"문제 해결" 내용을 빠짐없이 싣는다.
 - `messages.query`는 반드시 `folderId` 지정, 폴더 하나씩 순차 실행, 폴더 사이 `setTimeout(0)` 양보 (명세 10절). `Promise.all` 병렬화 금지.
 - content script 클래스 접두사 `lc-`, 텍스트는 `textContent`만.
-- `gecko.id`(`label-chips@leekd123`)는 변경 금지.
+- `gecko.id`(`label-chips-for-gmail@leekd123`)는 변경 금지.
 
 ## 빌드 / 테스트
 
