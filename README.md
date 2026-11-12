@@ -86,3 +86,7 @@ node --test "tests/*.test.mjs"
 ## 개발 중 설치
 
 Thunderbird → 부가 기능 및 테마 → 톱니바퀴 → 부가 기능 디버그 → 임시 부가 기능 로드 → `extension/manifest.json` 선택.
+
+## 라이선스
+
+[MIT](LICENSE)

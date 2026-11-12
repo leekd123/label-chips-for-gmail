@@ -88,3 +88,7 @@ node --test "tests/*.test.mjs"
 ## Installing during development
 
 Thunderbird → Add-ons and Themes → gear icon → Debug Add-ons → Load Temporary Add-on → select `extension/manifest.json`.
+
+## License
+
+[MIT](LICENSE)
