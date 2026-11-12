@@ -2,7 +2,7 @@
 
 [한국어](REQUIREMENTS.ko.md) | **English**
 
-Target version: 0.1.0
+Target version: 0.1.1
 This document specifies the extension so it can be implemented from scratch. It describes both the behavior users observe and the internal rules needed to guarantee that behavior.
 `[Required]` marks items that must be followed; `[Free]` marks items left to the implementer. Behavior rules without a mark are treated as `[Required]`.
 
@@ -23,7 +23,7 @@ This document specifies the extension so it can be implemented from scratch. It 
 | `name` | `Label Chips for Gmail` |
 | `description` | `Shows Gmail labels at the top of each message` |
 | `author` | `leekd123` |
-| `version` | `0.1.0` |
+| `version` | `0.1.1` |
 | `default_locale` | `en` — options page text lives in `_locales/en` and `_locales/ko` (17.2) |
 | `browser_specific_settings.gecko.id` | `label-chips-for-gmail@leekd123` (must not change after the first release — changing it makes it a different extension) |
 | `browser_specific_settings.gecko.strict_min_version` | `121.0` (uses `folders.query`, `MailFolder.id`, and `folderId` in `messages.query`; `messagesPerPage` is TB 120+) |
@@ -258,7 +258,7 @@ Background: `messages.query` walks the target folder's messages on Thunderbird's
 11. **Non-blocking rendering**: the content script does not block message display while waiting for the response. The message body appears first and the labels are inserted when the response arrives.
 12. **Non-blocking event listeners**: invalidation listeners and script registration at startup run without being awaited; failures are only logged.
 
-Known limitation (accepted in 0.1.0): `messages.query` walks every header in a folder without an index, and a single folder query cannot be split, so a label folder with a very large number of messages can cause a brief stutter while it is queried.
+Known limitation (accepted in 0.1.1): `messages.query` walks every header in a folder without an index, and a single folder query cannot be split, so a label folder with a very large number of messages can cause a brief stutter while it is queried.
 
 ## 11. Message display script (UI)
 

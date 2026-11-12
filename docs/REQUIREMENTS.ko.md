@@ -4,7 +4,7 @@
 
 > 영문 [REQUIREMENTS.md](REQUIREMENTS.md)의 한국어 번역본이다. 두 문서의 내용이 다르면 영문판을 따른다.
 
-대상 버전: 0.1.0
+대상 버전: 0.1.1
 이 문서는 확장을 처음부터 구현하기 위한 명세다. 사용자가 관찰하는 동작과, 그 동작을 보장하는 데 필요한 내부 규칙을 모두 적는다.
 `[필수]`는 반드시 지켜야 하는 항목, `[자유]`는 구현 재량 항목이다. 표시가 없는 동작 규칙은 `[필수]`로 본다.
 
@@ -25,7 +25,7 @@
 | `name` | `Label Chips for Gmail` |
 | `description` | `Shows Gmail labels at the top of each message` |
 | `author` | `leekd123` |
-| `version` | `0.1.0` |
+| `version` | `0.1.1` |
 | `default_locale` | `en` — 설정 화면 문구는 `_locales/en`, `_locales/ko`에 둔다 (17.2) |
 | `browser_specific_settings.gecko.id` | `label-chips-for-gmail@leekd123` (최초 배포 후에는 변경 금지 — 바꾸면 다른 확장으로 인식됨) |
 | `browser_specific_settings.gecko.strict_min_version` | `121.0` (`folders.query`, `MailFolder.id`, `messages.query`의 `folderId` 사용. `messagesPerPage`는 TB 120+) |
@@ -260,7 +260,7 @@ Gmail에서 라벨 추가/제거/이동은 Thunderbird에서 폴더 간 복사/�
 11. **렌더링 비차단**: content script는 응답을 기다리는 동안 메일 표시를 막지 않는다. 메일 본문이 먼저 보이고 라벨은 응답이 온 뒤 삽입된다.
 12. **이벤트 리스너 비차단**: 무효화 리스너와 시작 시 스크립트 등록은 기다리지 않고 실행하며, 실패는 로그만 남긴다.
 
-알려진 한계(0.1.0에서 허용): `messages.query`는 색인 없이 폴더의 모든 헤더를 순회하고, 폴더 하나의 조회 자체는 쪼갤 수 없으므로, 메일이 매우 많은 단일 라벨 폴더는 그 폴더를 조회하는 동안 짧게 끊길 수 있다.
+알려진 한계(0.1.1에서 허용): `messages.query`는 색인 없이 폴더의 모든 헤더를 순회하고, 폴더 하나의 조회 자체는 쪼갤 수 없으므로, 메일이 매우 많은 단일 라벨 폴더는 그 폴더를 조회하는 동안 짧게 끊길 수 있다.
 
 ## 11. 메일 표시 스크립트 (UI)
 

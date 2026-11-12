@@ -3,7 +3,7 @@
   "name": "Label Chips for Gmail",
   "description": "Shows Gmail labels at the top of each message",
   "author": "leekd123",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "default_locale": "en",
   "browser_specific_settings": {
     "gecko": {
