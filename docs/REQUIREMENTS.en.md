@@ -191,7 +191,7 @@ Returns: the label paths of the folders that contain the message (in folder orde
 
 ### 8.4 Limits of the search
 
-`messages.query` searches only the **local folder data Thunderbird has already synchronized**, not the Gmail server. Copies in label folders that have not been synchronized yet are not found. This limit is mitigated by the new-mail invalidation in 9.3 and the user settings in section 16.
+`messages.query` searches only the **local folder data Thunderbird has already synchronized**, not the Gmail server. Copies in label folders that have not been synchronized yet are not found. This limit is mitigated by the new-mail invalidation in 9.3 and the recommended Thunderbird setting in section 16 (checking all folders for new mail).
 
 ## 9. Caches
 
@@ -342,7 +342,7 @@ Known limitation (accepted in 0.1.0): `messages.query` walks every header in a f
 
 - The extension does not ask the Gmail server; it finds the same message in the folders Thunderbird has downloaded and shows them as labels.
 - Therefore **labels whose folders Thunderbird has not synchronized yet are not shown.**
-- All Mail, Spam and Trash are not shown as labels (only when they are the folder currently opened).
+- All Mail, Spam and Trash are not shown as labels (they are shown only when they are the folder currently opened).
 
 ### 16.2 Recommended setting: check all folders for new mail
 
