@@ -359,7 +359,7 @@ Option A — all folders (recommended):
 Option B — selected label folders only:
 
 1. In the folder pane, right-click the label folder → **Properties**.
-2. Turn on **When getting new messages for this account, always check this folder** (Korean UI: *새 메시지를 받을 때 항상 이 폴더 확인*).
+2. Turn on **When getting new messages for this account, always check this folder**.
 3. Repeat for each label folder needed.
 
 Point to mention: Option A can make checking for new mail take longer on accounts with many folders.
@@ -384,10 +384,10 @@ The README covers how to open the options page (Add-ons Manager → Extensions �
 
 | Key | Name on screen | Type | Default | Allowed range | Affects |
 |---|---|---|---|---|---|
-| `excludeArchives` | Exclude All Mail (전체보관함 제외) | Boolean | `true` | — | 8.1 |
-| `excludeJunk` | Exclude Spam (스팸 제외) | Boolean | `true` | — | 8.1 |
-| `excludeTrash` | Exclude Trash (휴지통 제외) | Boolean | `true` | — | 8.1 |
-| `labelCacheMinutes` | Label cache lifetime (minutes) (라벨 캐시 유지 시간 (분)) | Integer | `30` | `1`–`1440` | 9.2 |
+| `excludeArchives` | Exclude All Mail | Boolean | `true` | — | 8.1 |
+| `excludeJunk` | Exclude Spam | Boolean | `true` | — | 8.1 |
+| `excludeTrash` | Exclude Trash | Boolean | `true` | — | 8.1 |
+| `labelCacheMinutes` | Label cache lifetime (minutes) | Integer | `30` | `1`–`1440` | 9.2 |
 
 Values not in this table (the fixed constants in section 18) cannot be changed by the user.
 
@@ -395,11 +395,11 @@ Values not in this table (the fixed constants in section 18) cannot be changed b
 
 - Provided through `options_ui` in the manifest. Built with HTML/JS/CSS, no framework.
 - Layout:
-  - "Search" (검색) section: three checkboxes for excluded folders
-  - "Cache" (캐시) section: label cache lifetime (number input)
-  - "Restore defaults" (기본값으로 되돌리기) button
+  - "Search" section: three checkboxes for excluded folders
+  - "Cache" section: label cache lifetime (number input)
+  - "Restore defaults" button
 - Each item has a one-line description below it. The following item shows a warning:
-  - Exclude All Mail: "When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly." (Korean: "끄면 메일을 열 때마다 전체보관함을 검색하므로 Thunderbird가 느려지거나 잠시 멈출 수 있습니다.")
+  - Exclude All Mail: "When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly."
 - Language: all text on the page (title, section names, item names, descriptions, warning, error, button) comes from `_locales/<lang>/messages.json` through `browser.i18n.getMessage`. Supported languages are English (`en`, `default_locale`) and Korean (`ko`); Thunderbird picks one from its UI language and falls back to English. Numbers in messages (range, default) are filled in from the constants in the shared settings module, not written into the message text. The HTML holds the English text as a fallback.
 - Saving: no save button; values are saved as soon as they change (`change` event).
 - Validation: if a value is not an integer or is outside the allowed range, it is not saved and an error is shown next to that input. Other items can still be saved.

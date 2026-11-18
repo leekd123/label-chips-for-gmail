@@ -44,10 +44,10 @@ The options page is in Korean; the labels shown on screen are given in parenthes
 
 | Item | Description | Default | Notes |
 |---|---|---|---|
-| Exclude All Mail (전체보관함 제외) | Leaves All Mail (`[Gmail]/All Mail`) out of the label search. | On | When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly. |
-| Exclude Spam (스팸 제외) | Leaves the Spam folder out of the label search. | On | |
-| Exclude Trash (휴지통 제외) | Leaves the Trash folder out of the label search. | On | |
-| Label cache lifetime in minutes (라벨 캐시 유지 시간 (분)) | How long labels, once found, are shown without searching again. | 30 | Only integers from 1 to 1440 are saved. Out-of-range input shows an error and the previous value is kept. |
+| Exclude All Mail | Leaves All Mail (`[Gmail]/All Mail`) out of the label search. | On | When turned off, All Mail is searched every time you open a message, which can make Thunderbird slow or freeze briefly. |
+| Exclude Spam | Leaves the Spam folder out of the label search. | On | |
+| Exclude Trash | Leaves the Trash folder out of the label search. | On | |
+| Label cache lifetime (minutes) | How long labels, once found, are shown without searching again. | 30 | Only integers from 1 to 1440 are saved. Out-of-range input shows an error and the previous value is kept. |
 
 Copying, moving or deleting messages, receiving new mail, folder changes and settings changes trigger a new search regardless of the cache lifetime.
 

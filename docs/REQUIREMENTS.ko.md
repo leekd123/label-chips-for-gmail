@@ -386,10 +386,10 @@ Thunderbird는 기본적으로 받은편지함만 새 메일을 확인한다. Gm
 
 | 키 | 화면 표시 이름 | 형식 | 기본값 | 허용 범위 | 영향 |
 |---|---|---|---|---|---|
-| `excludeArchives` | 전체보관함 제외 (Exclude All Mail) | 불리언 | `true` | — | 8.1 |
-| `excludeJunk` | 스팸 제외 (Exclude Spam) | 불리언 | `true` | — | 8.1 |
-| `excludeTrash` | 휴지통 제외 (Exclude Trash) | 불리언 | `true` | — | 8.1 |
-| `labelCacheMinutes` | 라벨 캐시 유지 시간 (분) (Label cache lifetime (minutes)) | 정수 | `30` | `1`–`1440` | 9.2 |
+| `excludeArchives` | 전체보관함 제외 | 불리언 | `true` | — | 8.1 |
+| `excludeJunk` | 스팸 제외 | 불리언 | `true` | — | 8.1 |
+| `excludeTrash` | 휴지통 제외 | 불리언 | `true` | — | 8.1 |
+| `labelCacheMinutes` | 라벨 캐시 유지 시간 (분) | 정수 | `30` | `1`–`1440` | 9.2 |
 
 위 표에 없는 값(18절의 고정 상수)은 사용자가 바꿀 수 없다.
 
