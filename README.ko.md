@@ -4,6 +4,7 @@
 
 Gmail/Google Workspace IMAP 계정의 메일을 열면, 그 메일에 붙은 Gmail 라벨을 본문 맨 위에 칩으로 보여 주는 Thunderbird 확장.
 
+- 설치: [Thunderbird 부가 기능 (addons.thunderbird.net)](https://addons.thunderbird.net/addon/label-chips-for-gmail/), 또는 Thunderbird 부가 기능 관리자에서 "Label Chips for Gmail" 검색
 - Thunderbird 121 이상
 - 요구사항 명세: [docs/REQUIREMENTS.ko.md](docs/REQUIREMENTS.ko.md) (한국어 번역본. 기준 문서는 영문 [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md))
 

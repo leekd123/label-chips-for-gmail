@@ -4,6 +4,7 @@
 
 A Thunderbird extension that shows the Gmail labels of a message as chips at the top of the message body when you open a message from a Gmail/Google Workspace IMAP account.
 
+- Install: [Thunderbird Add-ons (addons.thunderbird.net)](https://addons.thunderbird.net/addon/label-chips-for-gmail/), or search for "Label Chips for Gmail" in Thunderbird's Add-ons Manager
 - Thunderbird 121 or later
 - Requirements specification: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) (Korean translation: [docs/REQUIREMENTS.ko.md](docs/REQUIREMENTS.ko.md))
 
