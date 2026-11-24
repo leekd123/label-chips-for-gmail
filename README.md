@@ -59,7 +59,7 @@ Copying, moving or deleting messages, receiving new mail, folder changes and set
 | A label just added in Gmail on the web is not shown | Same as above (the server change has not been synchronized yet) | Same as above |
 | No labels are shown at all | The account was not recognized as a Google account (POP3 account, non-IMAP account, failed MX lookup for the domain) | Make sure it is an IMAP account. If it was a network problem, open the message again after 5 minutes. |
 | All Mail / Spam / Trash are not shown as labels | They are excluded by default | Turn off the exclusion in the settings if you need them (All Mail can be slow). |
-| Labels of the open message do not change | Labels already shown are not refreshed | Select another message, then open this one again. |
+| Labels of the open message do not change | Labels already shown are refreshed only when the message is copied, moved, deleted or received in Thunderbird; folder and settings changes do not refresh them | Select another message, then open this one again. |
 
 ## Privacy
 

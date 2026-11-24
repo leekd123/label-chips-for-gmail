@@ -24,6 +24,12 @@ export function forgetTab(tabId) {
   tabStates.delete(tabId);
 }
 
+/** Ids of the tabs whose last request was for this message (spec 9.3 refresh). */
+export function tabsDisplaying(accountId, headerMessageId) {
+  const key = makeLabelKey(accountId, headerMessageId);
+  return [...tabStates].filter(([, state]) => state.displayedKey === key).map(([tabId]) => tabId);
+}
+
 function isKeyDisplayedInAnyTab(key) {
   for (const state of tabStates.values()) {
     if (state.displayedKey === key) {

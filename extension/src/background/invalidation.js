@@ -2,6 +2,18 @@
 
 import { clearFolderListCache } from "./folders.js";
 import { invalidateAllLabels, invalidateMessage } from "./label-service.js";
+import { tabsDisplaying } from "./request-handler.js";
+
+// Absolute path so it resolves from the extension root for every API.
+export const CONTENT_JS = "/src/content/labels.js";
+
+/** Re-runs the display script in the tabs showing this message so its chips are redrawn. */
+function refreshDisplayedLabels(accountId, headerMessageId) {
+  for (const tabId of tabsDisplaying(accountId, headerMessageId)) {
+    // The tab may have closed or moved on; nothing to refresh then.
+    browser.tabs.executeScript(tabId, { file: CONTENT_JS }).catch(() => {});
+  }
+}
 
 /** Walks a (possibly paginated) MessageList without blocking the listener. */
 function invalidateMessageList(list) {
@@ -9,7 +21,9 @@ function invalidateMessageList(list) {
     let page = list;
     while (page) {
       for (const message of page.messages ?? []) {
-        invalidateMessage(message?.folder?.accountId, message?.headerMessageId);
+        const accountId = message?.folder?.accountId;
+        invalidateMessage(accountId, message?.headerMessageId);
+        refreshDisplayedLabels(accountId, message?.headerMessageId);
       }
       if (!page.id) {
         break;

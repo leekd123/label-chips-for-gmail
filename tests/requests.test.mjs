@@ -287,6 +287,22 @@ test("scenario 9: copy/move/delete events invalidate the message", async () => {
   }
 });
 
+test("a message event re-runs the display script only in tabs showing that message", async () => {
+  const account = fake.addAccount();
+  const id = fake.addMessage(account, ["/INBOX"]);
+  const other = fake.addMessage(account, ["/INBOX"]);
+  const tab = newTab();
+  const otherTab = newTab();
+  const header = fake.display(tab, account, "/INBOX", id);
+  fake.display(otherTab, account, "/INBOX", other);
+  await getLabels(tab);
+  await getLabels(otherTab);
+  const before = fake.world.calls.executeScript.length;
+  fake.browser.messages.onCopied.fire({ messages: [header] }, { messages: [] });
+  await settle(2);
+  assert.deepEqual(fake.world.calls.executeScript.slice(before), [{ tabId: tab, file: "/src/content/labels.js" }]);
+});
+
 test("paginated event message lists are walked with continueList", async () => {
   const account = fake.addAccount();
   const id = fake.addMessage(account, ["/INBOX"]);

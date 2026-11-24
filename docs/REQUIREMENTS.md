@@ -237,7 +237,8 @@ Adding, removing or moving a label in Gmail appears in Thunderbird as copying, m
   - Register with the second argument `monitorAllFolders = true` (TB 121+) to watch special folders such as Sent, not just the Inbox and normal folders.
   - The extension does not force folder synchronization (there is no API for it). Synchronization itself depends on Thunderbird's settings (section 16).
 - Folder event listeners are skipped if the event does not exist in the API.
-- Labels already drawn on screen are not refreshed. Changes appear when the message is displayed again.
+- **Refresh of displayed labels**: right after each per-message invalidation, re-run the message display script with `tabs.executeScript` in every tab whose latest `getLabels` request was for that message, so the chips are searched and drawn again without reopening the message. Failures (closed tab, no displayed message) are ignored and not awaited.
+- Full invalidations (folder events, settings changes) do not refresh labels already drawn on screen. Those changes appear when the message is displayed again.
 
 ## 10. Asynchronous processing / preventing UI freezes **[Core]**
 
@@ -333,6 +334,7 @@ Known limitation (accepted in 0.1.1): `messages.query` walks every header in a f
 | 24 | Run "Restore defaults" | Every item is saved as its default and takes effect immediately |
 | 25 | Restart Thunderbird | Changed settings are kept |
 | 26 | Quickly go back from message A → B → A before the search finishes | A's labels are shown (not left empty) |
+| 27 | Copy the open message to another label folder and keep it open | The new label chip appears without reopening the message |
 | 27 | Open the options page with the Thunderbird UI in Korean, then in another language (e.g. English, German) | Korean text in Korean; English text otherwise |
 
 ## 16. User manual requirements
@@ -372,7 +374,7 @@ Point to mention: Option A can make checking for new mail take longer on account
 | A label just added in Gmail on the web is not shown | Same as above (server change not synchronized yet) | Same as above |
 | No labels shown at all | Not recognized as a Google account (POP3 account, non-IMAP account, failed domain MX lookup) | Check that it is an IMAP account. If it was a network problem, open the message again after 5 minutes |
 | All Mail/Spam/Trash not shown as labels | Excluded by default | Turn off the exclusion in the settings if needed (All Mail can be slow) |
-| Labels of the open message do not change | Labels already shown are not refreshed | Select another message, then open it again |
+| Labels of the open message do not change | Labels already shown are refreshed only when the message is copied, moved, deleted or received in Thunderbird; folder and settings changes do not refresh them | Select another message, then open it again |
 
 ### 16.4 Settings guide
 

@@ -1,12 +1,11 @@
 // Background entry point (spec 12).
 
-import { registerInvalidationListeners } from "./invalidation.js";
+import { CONTENT_JS, registerInvalidationListeners } from "./invalidation.js";
 import { invalidateAllLabels } from "./label-service.js";
 import { forgetTab, handleRuntimeMessage } from "./request-handler.js";
 import { loadSettings, watchSettings } from "./settings.js";
 
-// Absolute paths so they resolve from the extension root for every API.
-const CONTENT_JS = "/src/content/labels.js";
+// Absolute path so it resolves from the extension root for every API.
 const CONTENT_CSS = "/src/content/labels.css";
 
 // 1. Listeners
