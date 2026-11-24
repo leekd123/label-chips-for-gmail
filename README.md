@@ -90,6 +90,27 @@ node --test "tests/*.test.mjs"
 
 Thunderbird → Add-ons and Themes → gear icon → Debug Add-ons → Load Temporary Add-on → select `extension/manifest.json`.
 
+- After changing the code, press **Reload** on the same screen; **Inspect** opens the background console.
+- A temporary add-on disappears when Thunderbird restarts, so load it again after each restart.
+
+### Testing next to the released version
+
+The add-on ID is fixed, so in a profile where the released version is installed the temporary add-on replaces it until Thunderbird restarts, and both share the same stored settings. To keep them apart, load the local version in a separate development profile.
+
+Create the profile (once):
+
+```powershell
+& "C:\Program Files\Mozilla Thunderbird\thunderbird.exe" -CreateProfile dev
+```
+
+Start it alongside your normal Thunderbird:
+
+```powershell
+& "C:\Program Files\Mozilla Thunderbird\thunderbird.exe" -P dev -no-remote
+```
+
+Add a Gmail account (IMAP) to the development profile once, wait for the folders to appear, then load the temporary add-on as above.
+
 ## License
 
 [MIT](LICENSE)

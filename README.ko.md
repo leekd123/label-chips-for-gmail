@@ -88,6 +88,27 @@ node --test "tests/*.test.mjs"
 
 Thunderbird → 부가 기능 및 테마 → 톱니바퀴 → 부가 기능 디버그 → 임시 부가 기능 로드 → `extension/manifest.json` 선택.
 
+- 코드를 고친 뒤에는 같은 화면에서 **새로 고침**을 누른다. **검사**를 누르면 백그라운드 콘솔이 열린다.
+- 임시 부가 기능은 Thunderbird를 재시작하면 사라지므로, 재시작할 때마다 다시 로드한다.
+
+### 배포 버전과 따로 테스트하기
+
+부가 기능 ID가 고정돼 있어서, 배포 버전이 설치된 프로필에서 임시 로드하면 Thunderbird를 재시작할 때까지 로컬 버전이 배포 버전을 대체하고 저장된 설정도 함께 쓴다. 둘을 분리하려면 개발용 프로필을 따로 만들어 거기서 로컬 버전을 로드한다.
+
+프로필 생성(한 번만):
+
+```powershell
+& "C:\Program Files\Mozilla Thunderbird\thunderbird.exe" -CreateProfile dev
+```
+
+평소 쓰는 Thunderbird와 동시에 실행:
+
+```powershell
+& "C:\Program Files\Mozilla Thunderbird\thunderbird.exe" -P dev -no-remote
+```
+
+개발용 프로필에 Gmail 계정(IMAP)을 한 번 추가하고, 폴더가 나타날 때까지 기다린 뒤 위와 같이 임시 부가 기능을 로드한다.
+
 ## 라이선스
 
 [MIT](LICENSE)
